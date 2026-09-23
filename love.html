@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днем Рождения, Любимая ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffb3c6 50%, #ff8fab 100%);
+            background-attachment: fixed;
+            color: #4a4a4a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-x: hidden;
+            padding: 20px 15px;
+            position: relative;
+        }
+
+        /* ===== ФОНОВЫЕ ФОТО (для больших экранов) ===== */
+        .bg-photos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-photo {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 180px;
+            animation: floatBg 8s infinite ease-in-out;
+        }
+
+        .bg-photo img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            border-radius: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 25px rgba(214, 51, 108, 0.4);
+            opacity: 0.55;
+        }
+
+        .bg-caption {
+            margin-top: 8px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6), 0 0 2px #d6336c;
+            padding: 6px 10px;
+            background: rgba(214, 51, 108, 0.85);
+            border-radius: 10px;
+            line-height: 1.3;
+            letter-spacing: 0.3px;
+            width: 100%;
+        }
+
+        .bg1 { top: 6%; left: 12%; transform: rotate(-6deg); animation-delay: 0s; }
+        .bg2 { top: 30%; right: 12%; transform: rotate(7deg); animation-delay: 2s; }
+        .bg3 { bottom: 22%; left: 12%; transform: rotate(-4deg); animation-delay: 4s; }
+        .bg4 { bottom: 4%; right: 12%; transform: rotate(6deg); animation-delay: 1s; }
+
+        @keyframes floatBg {
+            0%, 100% { transform: translateY(0) rotate(var(--r, -5deg)); }
+            50% { transform: translateY(-15px) rotate(var(--r, -5deg)); }
+        }
+
+        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 35px 20px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            animation: fadeIn 1.5s ease-out;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #d6336c;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #a61e4d;
+            margin-bottom: 25px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .gallery-title {
+            font-size: 20px;
+            color: #d6336c;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* ===== ГАЛЕРЕЯ ФОТО ДЕВУШКИ ===== */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            margin-bottom: 30px;
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(214, 51, 108, 0.3);
+            border: 3px solid #fff;
+            animation: slideIn 0.8s ease-out backwards;
+            background: #fff;
+        }
+
+        .photo-card:nth-child(1) { animation-delay: 0.2s; }
+        .photo-card:nth-child(2) { animation-delay: 0.4s; }
+        .photo-card:nth-child(3) { animation-delay: 0.6s; }
+        .photo-card:nth-child(4) { animation-delay: 0.8s; }
+        .photo-card:nth-child(5) { animation-delay: 1.0s; }
+        .photo-card:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .caption {
+            padding: 12px 15px;
+            background: linear-gradient(45deg, #d6336c, #ff8fab);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .caption::before { content: "❤ "; color: #ffe0e9; }
+        .caption::after { content: " ❤"; color: #ffe0e9; }
+
+        /* ===== МОБИЛЬНЫЙ БЛОК С ФОТО ПАРНЯ (скрыт на десктопе) ===== */
+        .my-photos-mobile {
+            display: none;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px dashed rgba(214, 51, 108, 0.4);
+        }
+
+        .my-photos-title {
+            font-size: 20px;
+            color: #d6336c;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .my-photo-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(214, 51, 108, 0.3);
+            border: 3px solid #fff;
+            background: #fff;
+            margin-bottom: 20px;
+        }
+
+        .my-photo-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .my-photo-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .my-photo-caption {
+            padding: 12px 15px;
+            background: linear-gradient(45deg, #a61e4d, #d6336c);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* ===== ТЕКСТ ПОЗДРАВЛЕНИЯ ===== */
+        .message {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(214, 51, 108, 0.15);
+        }
+
+        .message p { margin-bottom: 12px; }
+        .message p:last-child { margin-bottom: 0; }
+
+        .heart {
+            font-size: 38px;
+            color: #ff4d6d;
+            animation: beat 1s infinite;
+            margin: 15px 0;
+            display: inline-block;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff4d6d, #ff8fab);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 10px rgba(255, 77, 109, 0.4);
+        }
+
+        /* ===== КНОПКА ПЕРЕХОДА НА ДРУГУЮ СТРАНИЦУ ===== */
+        .next-btn {
+            display: none;
+            margin-top: 15px;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .next-btn.show {
+            display: inline-block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .poem {
+            font-style: italic;
+            color: #a61e4d;
+            margin-bottom: 25px;
+            font-size: 15px;
+            line-height: 1.7;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(214, 51, 108, 0.15);
+        }
+
+        .signature {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #d6336c;
+            font-size: 18px;
+        }
+
+        /* Плавающие сердечки */
+        .floating-heart {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+            50% { transform: translateY(-20px) rotate(20deg); opacity: 1; }
+            100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+        }
+
+        .h1 { top: 8%; left: 8%; animation-delay: 0s; }
+        .h2 { top: 18%; right: 8%; animation-delay: 1s; }
+        .h3 { bottom: 15%; left: 10%; animation-delay: 2s; }
+        .h4 { bottom: 25%; right: 10%; animation-delay: 3s; }
+        .h5 { top: 50%; left: 4%; animation-delay: 4s; }
+
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (телефон) ===== */
+        @media (max-width: 500px) {
+
+            .bg-photos {
+                display: none;
+            }
+
+            .my-photos-mobile {
+                display: block;
+            }
+
+            body {
+                padding: 10px 8px;
+            }
+
+            .container {
+                padding: 25px 15px;
+                border-radius: 24px;
+            }
+
+            h1 { font-size: 22px; }
+            .gallery-title { font-size: 18px; }
+
+            .photo-card img {
+                height: 280px;
+            }
+
+            .caption {
+                font-size: 16px;
+                padding: 10px 12px;
+            }
+
+            .my-photo-card img {
+                height: 280px;
+            }
+
+            .my-photo-caption {
+                font-size: 14px;
+            }
+
+            .message { font-size: 15px; }
+            .poem { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ФОНОВЫЕ ФОТО (только для больших экранов) ===== -->
+    <div class="bg-photos">
+
+        <div class="bg-photo bg1" style="--r: -6deg;">
+            <img src="bg1.jpg" alt="фон1">
+            <div class="bg-caption">Не знаю, нравится ли тебе моё тело, но оно только твоё 💪</div>
+        </div>
+
+        <div class="bg-photo bg2" style="--r: 7deg;">
+            <img src="bg2.jpg" alt="фон2">
+            <div class="bg-caption">Я рельефный, но что-то всё же есть 😏</div>
+        </div>
+
+        <div class="bg-photo bg3" style="--r: -4deg;">
+            <img src="bg3.jpg" alt="фон3">
+            <div class="bg-caption">Это тело принадлежит только тебе ❤️</div>
+        </div>
+
+        <div class="bg-photo bg4" style="--r: 6deg;">
+            <img src="bg4.jpg" alt="фон4">
+            <div class="bg-caption">Качаюсь для тебя, родная 💪💕</div>
+        </div>
+
+    </div>
+
+    <!-- Плавающие сердечки -->
+    <div class="floating-heart h1">❤️</div>
+    <div class="floating-heart h2">💖</div>
+    <div class="floating-heart h3">💕</div>
+    <div class="floating-heart h4">💗</div>
+    <div class="floating-heart h5">💓</div>
+
+    <!-- ===== ОСНОВНОЙ КОНТЕЙНЕР ===== -->
+    <div class="container">
+        <h1>С Днём Рождения, Родная!</h1>
+        <div class="subtitle">Моей любимой девушке</div>
+
+        <div class="gallery-title">✨ Ты — моё вдохновение ✨</div>
+
+        <div class="gallery">
+            <div class="photo-card">
+                <img src="1.jpg" alt="Самая красивая">
+                <div class="caption">Самая красивая</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="2.jpg" alt="Самая сексуальная">
+                <div class="caption">Самая сексуальная</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="3.jpg" alt="Самая милая">
+                <div class="caption">Самая милая</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="4.jpg" alt="Самая нежная">
+                <div class="caption">Самая нежная</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="5.jpg" alt="Самая родная">
+                <div class="caption">Самая родная</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="6.jpg" alt="Единственная моя">
+                <div class="caption">Единственная моя</div>
+            </div>
+        </div>
+
+        <div class="message">
+            <p>Сегодня особенный день — день, когда мир стал ярче, потому что в нём появилась <strong>ты</strong>. ✨</p>
+
+            <p>Я хочу пожелать тебе, чтобы каждый твой день был наполнен радостью, как этот праздник. Пусть сбываются самые смелые мечты, а глаза всегда светятся от счастья.</p>
+
+            <p>Знаешь, я часто думаю о том, как мне повезло. Ты — моё вдохновение, моя нежность и мой самый близкий человек. Я люблю тебя больше всего на свете. Твоя улыбка — это моё личное солнце.</p>
+
+            <p>Спасибо, что ты рядом. Я обещаю делать всё, чтобы ты чувствовала себя самой счастливой девушкой на планете. Ты — моё всё. ❤️</p>
+            <p>Ты та кого я полюбил. Да были у нас соры и недопанимания , хотя они щас есть, но надеюсь мы все это пройдем и будем вместе. Я хочу хорошую концовку с тобой. Люблю тебя очень сльно и скучв. по тебе моя зайка ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</p>
+            <p> Так же ху сказать что даже не смотре на все проблемы которые на меня накотились и что мне много чего кажеться, что я скорее всего надумываю себе. Я хочу чтобы ты была только моя и только со мной. Не хочу чтобы ты обращала внимание на других пацанов, не хочу что бы ты дарила им свою улыбку, потому что это только мое. Ты лучшеее в моей жизни принцесса моя ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️маленька❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️ ❤️</p>
+            <p>Так же нас ждет большое испытание которое я надею мы пройдем. Да мне страшно что что-то может пойти не так, но я верю в лучшее. Люблю теббя пиздец как сильно, сильнее чем ты можешь себе представить.❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️ ❤️</p>
+            <p>С днем рождения тебя!!!!!!!! всего самого наилучшего тебе: здоровье, денег, легкой учебы и многое другое.Также желаю тебе, а также и себе чтобы у нас с тобой все было хорошо, все недопанимания ушли, чтобы наша любовь была чиста и небыло у нас друг от друга секретов. Люблю тебя родная моя, красатуличка моя, принцесска моя, ты просто секси. ❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️ ❤️
+Я не могу передать всю любовь словами, даже и не всегда получаеться показать на деле, но я тебя люблю очень очень очень сильно при сильно ❤️❤️❤️❤️❤️ ❤️❤️❤️❤️❤️ ❤️❤️❤️❤️❤️ ❤️❤️❤️❤️❤️ ❤️❤️❤️❤️❤️ ❤️❤️❤️❤️❤️</p>
+
+        </div>
+
+        <div class="heart">❤️</div>
+
+        <div class="poem">
+            Ты — ангел мой, ты — свет в ночи,<br>
+            Ты — песня, что  достоет до глубины души.<br>
+            Люблю тебя, дышу тобой,<br>
+            Навеки я, навеки твой.
+            Ты самая красивая, милая, добрая, заботливая и многое другое, перечислять можно бесконечно.
+        </div>
+
+        <button class="btn" onclick="showLove()">Нажми сюда 💌</button>
+
+        <!-- НОВАЯ КНОПКА (появится после нажатия) -->
+        <a href="index.html" class="btn next-btn" id="nextBtn">Перейти дальше →</a>
+
+        <div class="signature">Твой навсегда любимый Даня ❤️❤️❤️❤️❤️...</div>
+
+        <!-- ===== МОИ ФОТО (видны ТОЛЬКО на телефоне, в самом конце формы) ===== -->
+        <div class="my-photos-mobile">
+            <div class="my-photos-title">💪 А это я — твой навсегда 💪</div>
+
+            <div class="my-photo-card">
+                <img src="bg1.jpg" alt="моё фото 1">
+                <div class="my-photo-caption">ставь на обои принцесса моя,<br> оно только твоё 💪</div>
+            </div>
+
+            <div class="my-photo-card">
+                <img src="bg2.jpg" alt="моё фото 2">
+                <div class="my-photo-caption">сНе знаю, нравится ли тебе моё тело,<br>но что-то всё же есть и оно только твое!!!😏</div>
+            </div>
+
+            <div class="my-photo-card">
+                <img src="bg3.jpg" alt="моё фото 3">
+                <div class="my-photo-caption">Это тело принадлежит<br>только тебе ❤️</div>
+            </div>
+
+            <div class="my-photo-card">
+                <img src="bg4.jpg" alt="моё фото 4">
+                <div class="my-photo-caption">да я не кочек но чтото есть и надеюсь тебе нравиться,<br>родная 💪💕</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showLove() {
+            const btn = document.querySelector('.btn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            btn.innerHTML = 'Я тебя обожаю! 💖';
+
+            for (let i = 0; i < 40; i++) {
+                setTimeout(createHeart, i * 30);
+            }
+
+            // Показываем вторую кнопку через 1 секунду
+            setTimeout(() => {
+                nextBtn.classList.add('show');
+            }, 1000);
+
+            setTimeout(() => {
+                btn.innerHTML = 'Нажми сюда 💌';
+            }, 3000);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = ['❤️','💖','💕','💗','💓','💝'][Math.floor(Math.random()*6)];
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.fontSize = Math.random() * 25 + 15 + 'px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.transition = 'all 1.5s ease-out';
+            heart.style.opacity = '1';
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.style.transform = `translate(${(Math.random() - 0.5) * 400}px, ${(Math.random() - 0.5) * 400}px) scale(0) rotate(${Math.random()*360}deg)`;
+                heart.style.opacity = '0';
+            }, 10);
+
+            setTimeout(() => { heart.remove(); }, 1600);
+        }
+    </script>
+</body>
+</html>

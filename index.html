@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Я тебя люблю ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffb3c6 50%, #ff8fab 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 15px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 40px 25px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #d6336c;
+            margin-bottom: 30px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .love-line {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff4d6d;
+            padding: 6px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: lineAppear 0.6s ease-out forwards;
+            text-shadow: 0 1px 3px rgba(255, 77, 109, 0.25);
+        }
+
+        .love-line:nth-child(odd) {
+            color: #d6336c;
+        }
+
+        .love-line:nth-child(even) {
+            color: #ff4d6d;
+        }
+
+        @keyframes lineAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== КНОПКА "Ты у меня самая..." ===== */
+        .qualities-btn {
+            display: none;
+            margin-top: 35px;
+            background: linear-gradient(45deg, #ff4d6d, #ff8fab);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.6s ease;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        .qualities-btn.show {
+            display: inline-block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .qualities-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== СПИСОК КАЧЕСТВ ===== */
+        .qualities-list {
+            margin-top: 25px;
+        }
+
+        .quality-line {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 7px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: lineAppear 0.6s ease-out forwards;
+            text-shadow: 0 1px 3px rgba(255, 77, 109, 0.25);
+        }
+
+        .quality-line:nth-child(odd) {
+            color: #d6336c;
+        }
+
+        .quality-line:nth-child(even) {
+            color: #ff4d6d;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            background: linear-gradient(45deg, #ff4d6d, #ff8fab);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+        }
+
+        .heart-big {
+            font-size: 46px;
+            color: #ff4d6d;
+            animation: beat 1s infinite;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 24px; }
+            .love-line { font-size: 18px; }
+            .quality-line { font-size: 18px; }
+            .container { padding: 30px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="heart-big">❤️</div>
+        <h1>Я тебя люблю</h1>
+        <div id="loveContainer"></div>
+
+        <!-- Кнопка "Ты у меня самая..." -->
+        <button class="qualities-btn" id="qualitiesBtn" onclick="showQualities()">Ты у меня самая...</button>
+
+        <!-- Список качеств -->
+        <div class="qualities-list" id="qualitiesList"></div>
+
+        <a href="love.html" class="back-btn">← Вернуться назад</a>
+    </div>
+
+    <script>
+        // ===== ГЕНЕРАЦИЯ 101 СТРОКИ "Я тебя люблю ❤️❤️❤️" =====
+        const container = document.getElementById('loveContainer');
+        const totalLines = 101;
+        const lineDelay = 0.08; // задержка между строками
+
+        for (let i = 0; i < totalLines; i++) {
+            const line = document.createElement('div');
+            line.className = 'love-line';
+            line.textContent = 'Я тебя люблю ❤️❤️❤️';
+            line.style.animationDelay = (i * lineDelay) + 's';
+            container.appendChild(line);
+        }
+
+        // Общее время появления всех строк (в мс)
+        const totalTime = totalLines * lineDelay * 1000;
+
+        // Показываем кнопку "Ты у меня самая..." после появления всех строк
+        const qualitiesBtn = document.getElementById('qualitiesBtn');
+        setTimeout(() => {
+            qualitiesBtn.classList.add('show');
+        }, totalTime + 500);
+
+        // ===== СПИСОК КАЧЕСТВ =====
+        const qualities = [
+            'Красивая',
+            'Любимая',
+            'Лучшая',
+            'Родная',
+            'Милая',
+            'Нежная',
+            'Заботливая',
+            'Добрая',
+            'Умная',
+            'Верная',
+            'Искренняя',
+            'Прекрасная',
+            'Обворожительная',
+            'Очаровательная',
+            'Сексуальная',
+            'Восхитительная',
+            'Неповторимая',
+            'Единственная',
+            'Моя половинка',
+            'Моё счастье',
+            'Моё вдохновение',
+            'Моя любовь',
+            'Моя вселенная',
+            'Самая лучшая на свете',
+            'Идеальная',
+            'Солнышко',
+            'Лапочка',
+            'Зайка',
+            'Принцесса',
+            'Королева',
+            'Ангел',
+            'Мечта',
+            'Сокровище',
+            'Драгоценность',
+            'Смысл жизни',
+            'Моё всё'
+        ];
+
+        function showQualities() {
+            const list = document.getElementById('qualitiesList');
+            // Если уже показано — не дублируем
+            if (list.children.length > 0) return;
+
+            qualities.forEach((word, i) => {
+                const el = document.createElement('div');
+                el.className = 'quality-line';
+                el.textContent = word + ' ❤️';
+                el.style.animationDelay = (i * 0.12) + 's';
+                list.appendChild(el);
+            });
+        }
+    </script>
+
+</body>
+</html>
